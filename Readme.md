@@ -1,6 +1,7 @@
-# `lm_proxy` Language Model Proxy
+# `lm-proxy` Language Model Proxy
 
-A proxy for (large) language models to spin up implementation servers on demand.
+A proxy for (large) language models that forwards to external servers. It manages external servers
+and spins them up and down on demand.
 
 Config:
 
