@@ -1,4 +1,4 @@
-# `lm-proxy` - (latge) language model proxy
+# `lm-proxy` - (large) language model proxy
 
 A proxy for (large) language models that forwards to external servers. It manages external servers
 and spins them up and down on demand.

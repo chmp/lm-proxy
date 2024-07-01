@@ -3,6 +3,11 @@ name = "lm-proxy"
 version = "0.1.0"
 edition = "2021"
 
+authors = ["Christopher Prohm <mail@cprohm.de>"]
+description  = "A proxy for (large) language models"
+repository = "https://github.com/chmp/lm-proxy"
+license = "MIT"
+
 [dependencies]
 argh = "0.1"
 anyhow = "1"
