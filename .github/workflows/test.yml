@@ -1,0 +1,55 @@
+{
+  "name": "Test",
+  "on": {
+    "workflow_dispatch": {},
+    "pull_request": {
+      "branches": [
+        "main"
+      ],
+      "types": [
+        "opened",
+        "edited",
+        "reopened",
+        "ready_for_review",
+        "synchronize"
+      ]
+    }
+  },
+  "env": {
+    "CARGO_TERM_COLOR": "always"
+  },
+  "jobs": {
+    "build": {
+      "runs-on": "ubuntu-latest",
+      "steps": [
+        {
+          "uses": "actions/checkout@v4"
+        },
+        {
+          "name": "rustc",
+          "run": "rustc --version"
+        },
+        {
+          "name": "cargo",
+          "run": "cargo --version"
+        },
+        {
+          "name": "Check format",
+          "run": "cargo fmt --check"
+        },
+        {
+          "name": "Check",
+          "run": "cargo check"
+        },
+        {
+          "name": "Build",
+          "run": "cargo build"
+        },
+        {
+          "name": "Test",
+          "run": "cargo test"
+        }
+      ]
+    }
+  }
+}

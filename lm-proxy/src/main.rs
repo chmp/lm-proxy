@@ -6,6 +6,7 @@ use lm_proxy::{
     server::{self, build_router},
     server_state::ServerState,
 };
+use tokio::net::TcpListener;
 use tracing::info;
 
 mod lm_proxy;
@@ -24,8 +25,9 @@ async fn main() -> Result<()> {
 
     let task = tokio::spawn(server::cleanup_models(state));
 
-    let listener =
-        tokio::net::TcpListener::bind((Ipv4Addr::new(127, 0, 0, 1), server_port)).await?;
+    let addr = (Ipv4Addr::new(127, 0, 0, 1), server_port);
+    let listener = TcpListener::bind(addr).await?;
+
     axum::serve(listener, router).await?;
     task.await?;
 
