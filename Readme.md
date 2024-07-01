@@ -28,7 +28,7 @@ args = [
 Start the server:
 
 ```bash
-lm_proxy config.toml
+lm-proxy serve config.toml
 ```
 
 Use the server:

@@ -9,8 +9,7 @@ use reqwest::Client;
 use tokio::{sync::Mutex, time::Instant};
 use tracing::debug;
 
-use super::config::Config;
-use super::servers::llama_cpp_server::LlamaCppServer;
+use crate::lm_proxy::{config::Config, servers::llama_cpp_server::LlamaCppServer};
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone)]
 pub struct KeepAliveToken(pub usize);

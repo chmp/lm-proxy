@@ -1,16 +1,7 @@
-use std::{collections::HashMap, fs, path::PathBuf, time::Duration};
+use std::{collections::HashMap, fs, path::Path, time::Duration};
 
 use anyhow::Result;
-use argh::FromArgs;
 use serde::{Deserialize, Serialize};
-
-#[derive(FromArgs)]
-/// llm_proxy - a proxy for LLM models
-pub struct Args {
-    /// the toml config file to parse
-    #[argh(positional)]
-    pub config: PathBuf,
-}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Config {
@@ -19,8 +10,8 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn form_args(args: &Args) -> Result<Self> {
-        let config_content = fs::read_to_string(&args.config)?;
+    pub fn form_path(path: &Path) -> Result<Self> {
+        let config_content = fs::read_to_string(path)?;
         let mut config: Config = toml::from_str(&config_content)?;
 
         let mut used_auto_ports = 0;

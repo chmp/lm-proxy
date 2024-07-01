@@ -14,11 +14,11 @@ use tokio::time::{self, Instant};
 use tower_http::trace::TraceLayer;
 use tracing::{error, info};
 
-use super::{
+use crate::lm_proxy::{
     error::ServerResult,
-    server_state::{ModelServer, ServerState},
     utils,
 };
+use super::server_state::{ModelServer, ServerState};
 
 #[derive(Debug, Clone, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ModelName(String);
