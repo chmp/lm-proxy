@@ -5,6 +5,7 @@ edition = "2021"
 
 authors = ["Christopher Prohm <mail@cprohm.de>"]
 description  = "A proxy for (large) language models"
+readme = "../Readme.md"
 repository = "https://github.com/chmp/lm-proxy"
 license = "MIT"
 
