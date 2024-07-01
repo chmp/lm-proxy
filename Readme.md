@@ -23,6 +23,15 @@ args = [
     "--port",
     "{{ port }}",
 ]
+
+[models.gemma2]
+args = [
+    "llama-server",
+    "--model",
+    "gemma-2-9b-it-q5_k_m.gguf",
+    "--port",
+    "{{ port }}",
+]
 ```
 
 Start the server:
@@ -41,9 +50,17 @@ client = OpenAI(
     api_key='unused',
 )
 
+# use the phi3 model
 response = client.chat.completions.create(
   model="phi3",
   messages=[{"role": "user", "content": "What is 2 + 3?"}]
+)
+print(response.choices[0].message.content)
+
+# use the gemma2 model
+response = client.chat.completions.create(
+  model="gemma2",
+  messages=[{"role": "user", "content": "How can I add 2 and 3 in Python?"}]
 )
 print(response.choices[0].message.content)
 ```
