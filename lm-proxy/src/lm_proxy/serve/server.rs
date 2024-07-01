@@ -10,15 +10,15 @@ use axum::{
     Router,
 };
 use serde::Deserialize;
-use tokio::time::{self, Instant};
+use tokio::{
+    sync::mpsc::Receiver,
+    time::{self, Instant},
+};
 use tower_http::trace::TraceLayer;
 use tracing::{error, info};
 
-use crate::lm_proxy::{
-    error::ServerResult,
-    utils,
-};
 use super::server_state::{ModelServer, ServerState};
+use crate::lm_proxy::{error::ServerResult, utils};
 
 #[derive(Debug, Clone, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ModelName(String);
@@ -32,8 +32,14 @@ pub fn build_router(state: Arc<ServerState>) -> Router {
         .with_state(state.clone())
 }
 
-pub async fn cleanup_models(state: Arc<ServerState>) {
+pub async fn cleanup_models(state: Arc<ServerState>, mut stop: Receiver<()>) {
     loop {
+        tokio::select! {
+            biased;
+            _ = stop.recv() => { break; }
+            _ = time::sleep(Duration::from_secs(10)) => {}
+        }
+
         time::sleep(Duration::from_secs(10)).await;
         let mut to_kill = Vec::new();
 

@@ -5,7 +5,6 @@ use argh::FromArgs;
 
 mod serve;
 
-
 #[derive(FromArgs, PartialEq, Debug)]
 /// llm_proxy - a proxy for LLM models
 pub struct Args {
@@ -32,7 +31,6 @@ impl Command {
         }
     }
 }
-
 
 #[derive(FromArgs, PartialEq, Debug)]
 /// Serve the configured moudles
